@@ -2,8 +2,8 @@
   Exports
 **********/
 
-var libs = require('./libs');
 var config = require('./config');
+var libs = require('./libs');
 
 /***********************
   Logger Initialization
@@ -19,6 +19,13 @@ var logger = new (libs.winston.Logger)({
 logger.cli();
 logger.info('Log level: %s',logLevel);
 
+/********************************
+ Database Handler Initialization
+********************************/
+
+var dbHandler = new (libs.db.dbHandler)(logger,dbName);
+dbHandler.connect();
+
 /**********************
  Server Initialization
 ***********************/
@@ -27,4 +34,6 @@ libs.http.createServer(function (req, res) {
 	res.writeHead(200, {'Content-Type': 'text/plain'});
 	res.end('Hello World\n'); }).listen(serverPort, "127.0.0.1");
 
-logger.info('Server started on http://127.0.0.1:%d',serverPort); 
+logger.info('Server started on http://127.0.0.1:%d',serverPort);
+
+

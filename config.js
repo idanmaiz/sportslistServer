@@ -14,5 +14,10 @@ logPath	= "/var/log/sportslist.log";
 /**********
   Server
 **********/
-serverPort = 3000
+serverPort = 3000;
 
+
+/*********
+ Database
+*********/
+dbName = "sportslist";
