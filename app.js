@@ -2,8 +2,9 @@
   Exports
 **********/
 
-var config = require('./config');
-var libs = require('./libs');
+
+var config = require('./config/config');
+var libs = require('./config/libs');
 
 /***********************
   Logger Initialization
@@ -32,24 +33,12 @@ dbHandler.connect();
 
 var app = libs.express();
 
-app.use(libs.express.static(__dirname + '/public'));
+app.use(libs.express.static(publicFolder));
 
 app.use(libs.bodyParser.json());
 
-app.post('/addEvent',function(req,res){
-	var callback = function(added){
-		if (added)
-			res.send('Event Added!');
-		else
-			res.send('Event not Added!');  
-	};
-//	console.log(req.body);
-	dbHandler.addEvent(req.body,callback);
-});
-
-app.get('/',function(req,res){
-	res.send('Hello World2!');
-});
+// Assign the routes for the app
+require('./config/routes')(app,dbHandler);
 
 var server;
 
