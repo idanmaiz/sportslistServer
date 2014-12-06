@@ -21,3 +21,9 @@ serverPort = 3000;
  Database
 *********/
 dbName = "sportslist";
+
+/*****
+  SSL
+******/
+useSSL = true;
+SSL_Folder = '/home/ubuntu/ssl';
