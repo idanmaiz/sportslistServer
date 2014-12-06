@@ -51,16 +51,31 @@ app.get('/',function(req,res){
 	res.send('Hello World2!');
 });
 
-var server = libs.https.createServer({
-    key: libs.fs.readFileSync('../ssl/server.key'),
-    cert: libs.fs.readFileSync('../ssl/server.crt'),
-    ca: libs.fs.readFileSync('../ssl/ca.crt'),
-    requestCert: true,
-    rejectUnauthorized: false
-}, app).listen(serverPort, function() {
-    var host = server.address().address;
-    var port = server.address().port;
-    logger.info('Server started on http://%s:%d',host,port);
-});
+var server;
+
+if (useSSL)
+{
+	server = libs.https.createServer({
+  	    key: libs.fs.readFileSync(SSL_Folder + '/server.key'),
+	    cert: libs.fs.readFileSync(SSL_Folder + '/server.crt'),
+   	    ca: libs.fs.readFileSync(SSL_Folder + '/ca.crt'),
+  	    requestCert: true,
+   	    rejectUnauthorized: false
+	}, app).listen(serverPort, function() {
+   	    var host = server.address().address;
+            var port = server.address().port;
+    	    logger.info('Server started on http://%s:%d with SSL',host,port);
+	});
+}
+else
+{
+	server = app.listen(serverPort,function(){
+	   var host = server.address().address;
+	   var port = server.address().port;
+	   logger.info('Server started on http://%s:%d',host,port);
+	});
+}
+
+
 
 
