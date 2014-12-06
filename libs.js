@@ -1,14 +1,8 @@
-var http = require('http');
-var express = require('express');
-var winston = require('winston');
-var db = require('./database.js');
-var bodyParser = require('body-parser');
-var https = require('https');
-var fs = require('fs');
-exports.bodyParser = bodyParser;
-exports.http = http;
-exports.express = express;
-exports.winston = winston;
-exports.db = db;
-exports.fs = fs;
-exports.https = https;
+
+exports.bodyParser = require('body-parser');
+exports.http = require('http');
+exports.express = require('express');
+exports.winston = require('winston');
+exports.db = require('./database.js');
+exports.fs = require('fs');
+exports.https = require('https');
