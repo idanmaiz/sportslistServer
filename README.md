@@ -1,57 +1,25 @@
-# server
+//install packages
+sudo apt-get install nodejs
+sudo apt-get install git
+sudo apt-get install npm
 
-Server Template
+//create symlink from node to nodejs
+sudo ln -s /usr/bin/nodejs /usr/bin/node
 
-## Getting Started
-### On the server
-Install the module with: `npm install server`
+//if you want ssl
+sudo apt-get install pwgen
+pwgen 50 1 -s > passphrase
+cat passphrase (have it copyable)
+openssl genrsa -des3 -out ca.key 1024
+openssl req -new -key ca.key -out ca.csr
+openssl x509 -req -days 365 -in ca.csr -out ca.crt -signkey ca.key
+openssl genrsa -des3 -out server.key 1024
+openssl req -new -key server.key -out server.csr
+cp server.key server.key.passphrase
+openssl rsa -in server.key.passphrase -out server.key
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-```javascript
-var server = require('server');
-server.awesome(); // "awesome"
-```
+//Dont forget in the config file to change useSSL to true and provide the ssl Folder.
 
-### In the browser
-Download the [production version][min] or the [development version][max].
-
-[min]: https://raw.github.com/idanmaiz/sportslist/master/dist/server.min.js
-[max]: https://raw.github.com/idanmaiz/sportslist/master/dist/server.js
-
-In your web page:
-
-```html
-<script src="dist/server.min.js"></script>
-<script>
-awesome(); // "awesome"
-</script>
-```
-
-In your code, you can attach server's methods to any object.
-
-```html
-<script>
-var exports = Bocoup.utils;
-</script>
-<script src="dist/server.min.js"></script>
-<script>
-Bocoup.utils.awesome(); // "awesome"
-</script>
-```
-
-## Documentation
-_(Coming soon)_
-
-## Examples
-_(Coming soon)_
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-_Also, please don't edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!_
-
-## Release History
-_(Nothing yet)_
-
-## License
-Copyright (c) 2014 IdanMaiz  
-Licensed under the MIT license.
+npm install -g mocha
+npm install chai
