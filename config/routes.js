@@ -1,6 +1,11 @@
 /*******************
        Routes
 *******************/
+var mongoose = require("mongoose");
+var models = require('./schemas');
+
+var Event = models.Event;
+var User = models.User;
 
 module.exports = function(app,dbHandler){
 	app.post('/addEvent',function(req,res){
