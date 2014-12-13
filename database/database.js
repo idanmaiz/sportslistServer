@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
-var Event = require('./schemas/Event');
-var User = require('./schemas/User');
+var models = require('./schemas');
+
+var Event = models.Event;
+var User = models.User;
 
 exports.dbHandler = function(logger,DBname) {
 
