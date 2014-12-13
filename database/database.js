@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
-var models = require('./schemas');
+var Event = require('./schemas/Event');
+var User = require('./schemas/User');
 
 exports.dbHandler = function(logger,DBname) {
 
@@ -24,7 +25,7 @@ exports.dbHandler = function(logger,DBname) {
 
     //Add new event to DB
     this.addEvent = function (eventDetails,cb) {
- 	var event = new models.Event();
+ 	var event = new Event();
 	event.title = eventDetails.title;
 	event.creator = eventDetails.creator;
 	event.save(function(err,doc){
@@ -38,6 +39,14 @@ exports.dbHandler = function(logger,DBname) {
 		}
 	});
     };
-}
+
+	this.authenticate = function(req,cb){
+		User.findOne({email:req.body.email,password:req.body.password},cb);
+	};
+
+	this.signin = function(req,cb){
+		User.findOne({email: req.body.email, password: req.body.password},cb);
+	};
+};
 
 

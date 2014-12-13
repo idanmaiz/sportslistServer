@@ -11,11 +11,17 @@ var EventSchema = new Schema({
   creator: String
 });
 
+var UserSchema = new Schema({
+  email:String,
+  password:String,
+  token:String
+})
+
 
 
 
 /** Models **/
 exports.Event = mongoose.model('Event',EventSchema);
-
+exports.User = mongoose.model('User',UserSchema);
 
 
