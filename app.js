@@ -12,7 +12,7 @@ var libs = require('./config/libs');
 
 var logger = new (libs.winston.Logger)({
     transports: [
-      new (libs.winston.transports.Console)({ level:logLevel, handleExceptions:true }),
+     // new (libs.winston.transports.Console)({ level:logLevel, handleExceptions:true }),
       new (libs.winston.transports.File)({ filename: logPath , json:false, level:logLevel, handleExceptions:true})
     ]
 });

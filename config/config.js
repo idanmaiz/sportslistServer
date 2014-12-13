@@ -25,7 +25,7 @@ dbName = "sportslist";
 /**************
   Public Files
 **************/
-publicFolder = '/home/ubuntu/client';
+publicFolder = '/home/ubuntu/sportslist/dist/';
 
 /*****
   SSL
